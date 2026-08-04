@@ -82,7 +82,7 @@ Keybinds.OnAction = function(action: string, callback)
 	Keybinds.AddListener({action = action, callback = callback, inputState = "Both"})
 end
 
-Keybinds.OnActionBeganStopped = function(action: string, callback)
+Keybinds.OnActionStopped = function(action: string, callback)
 	Keybinds.AddListener({action = action, callback = callback, inputState = "End"})
 end
 
