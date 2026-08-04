@@ -10,4 +10,4 @@ Extras:
 
 [Combat (during a test in a one piece cc game)](https://medal.tv/games/roblox/clips/1uyTZ0QM8-dDV_?invite=cr-MSxvTVUsMzM5MDc2MzQs)
 
-The most advanced Anti-Cheat on the platform [New Technology: CLASSIFIED]
+I have also developed a new AntiCheat technology which offers more control and cheating detection possibilities.
