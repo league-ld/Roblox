@@ -6,6 +6,7 @@ local events = game.ReplicatedStorage:WaitForChild("Events")
 local updateKeybindsEvent = events:WaitForChild("UpdateKeybinds")
 
 local player = game.Players.LocalPlayer
+local keybinds = game.ReplicatedStorage:WaitForChild("Keybinds")
 
 export type ActionListener = {
 	action: string,
