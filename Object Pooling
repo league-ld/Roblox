@@ -1,0 +1,172 @@
+--[[
+
+I have made this for my game which required ParticleEmitter that could emit particles visible through walls.
+Since Roblox's vanilla ParticleEmitter doesn't support this, I had to make one using BillboardGuis.
+I have made this script for the sake of optimization. It would be inefficient to make dozens of instances and destroy them, so I used
+an optimization technique called "Object Pooling." This class dynamically creates object as they are needed, and recycles them when they
+are finished.
+Object pooling is often used with games that have high instance count, such as bullet hells, although it's good to use anywhere where same
+or similar objects appear in high quantity.
+
+]]
+
+local Pool = {}
+Pool.__index = Pool
+
+export type PooledInstance = Instance -- For clearer intelisense
+
+type InstanceData = {
+	Available: boolean,
+	Index: number
+}
+
+local defaultValues = {
+	var = { -- Private variables
+		Instances = {} :: {InstanceData},
+		
+		InstanceCount = 0,
+		IndexPointer = 1
+	}
+}
+
+type PoolArgs = {
+	Prefab: PooledInstance,
+	PoolParent: Instance?,
+	
+	InitInstances: number,
+	Lifetime: number,
+	
+	SpawnBehaviour: (PooledInstance) -> ()?
+}
+
+export type Pool = typeof(Pool) & typeof(defaultValues) & PoolArgs
+
+local function deepCopy(t: {}): {}
+	local copy = {}
+	for i, v in pairs(t) do
+		if typeof(v) == "table" then
+			copy[i] = deepCopy(v)
+		else
+			copy[i] = v
+		end
+	end
+	return copy
+end
+
+Pool.AddInstanceToPool = function(self: Pool)
+	local instance = self.Prefab:Clone()
+	
+	local data: InstanceData = {
+		Available = true,
+		Index = self.var.InstanceCount + 1
+	}
+	
+	self.var.Instances[instance] = data
+	self.var.InstanceCount += 1
+end
+
+Pool.RemoveInstanceFromPool = function(self: Pool, instance: PooledInstance?)
+	instance = instance or self:GetInstanceFromIndex(self.var.InstanceCount)
+	if not instance then return end
+
+	local data: InstanceData = self.var.Instances[instance]
+	data.Available = true
+
+	for i, v in pairs(self.var.Instances) do
+		if v.Index > data.Index then
+			v.Index -= 1
+		end
+	end
+
+	self.var.Instances[instance] = nil
+	self.var.InstanceCount -= 1
+
+	instance:Destroy()
+end
+
+Pool.GetInstanceFromIndex = function(self: Pool, index: number): PooledInstance?
+	if index > self.var.InstanceCount or index < 1 then return end
+	
+	for i, v in pairs(self.var.Instances) do
+		if v.Index == index then
+			return i
+		end
+	end
+end
+
+Pool.GetFirstAvailableInstance = function(self: Pool): PooledInstance?
+	for i, v in pairs(self.var.Instances) do
+		if v.Available and v.Index >= self.var.IndexPointer then
+			return i
+		end
+	end
+end
+
+Pool.Spawn = function(self: Pool): PooledInstance
+	local instance = self:GetFirstAvailableInstance()
+	if not instance then
+		self:AddInstanceToPool()
+		instance = self:GetFirstAvailableInstance()
+	end
+	
+	local data: InstanceData = self.var.Instances[instance]
+	data.Available = false
+	
+	self.var.IndexPointer += 1
+	if self.var.IndexPointer > self.var.InstanceCount then
+		self.var.IndexPointer = 1
+	end
+	
+	if self.PoolParent then
+		instance.Parent = self.PoolParent
+	end
+	
+	if self.SpawnBehaviour then
+		task.spawn(self.SpawnBehaviour, instance)
+	end
+	
+	if self.Lifetime then
+		task.delay(self.Lifetime, self.Despawn, self, instance)
+	end
+	
+	return instance
+end
+
+Pool.Despawn = function(self: Pool, instance: PooledInstance)
+	if not instance then return end
+	
+	local data: InstanceData = self.var.Instances[instance]
+	if not data then return end
+	
+	data.Available = true
+	instance.Parent = nil
+end
+
+Pool.ClearPool = function(self: Pool)
+	for i, v in pairs(self.var.Instances) do
+		i:Destroy()
+	end
+	
+	table.clear(self.var.Instances)
+	self.var.InstanceCount = 0
+	self.var.IndexPointer = 1
+end
+
+Pool.new = function(args: PoolArgs): Pool
+	args = args or {}
+	assert(args.Prefab, "Prefab instance is required to make a pool.")
+	
+	local self: Pool = setmetatable(deepCopy(defaultValues), Pool)
+	
+	for i, v in pairs(args) do
+		self[i] = v
+	end
+	
+	for i = 0, self.InitInstances do
+		self:AddInstanceToPool()
+	end
+	
+	return self
+end
+
+return Pool
