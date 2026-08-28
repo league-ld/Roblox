@@ -24,8 +24,7 @@ local defaultValues = {
 	var = { -- Private variables
 		Instances = {} :: {[PooledInstance]: InstanceData},
 		
-		InstanceCount = 0,
-		IndexPointer = 1
+		InstanceCount = 0
 	}
 }
 
@@ -96,7 +95,7 @@ end
 
 Pool.GetFirstAvailableInstance = function(self: Pool): PooledInstance?
 	for i, v in pairs(self.var.Instances) do
-		if v.Available and v.Index >= self.var.IndexPointer then
+		if v.Available then
 			return i
 		end
 	end
@@ -111,11 +110,6 @@ Pool.Spawn = function(self: Pool): PooledInstance
 	
 	local data: InstanceData = self.var.Instances[instance]
 	data.Available = false
-	
-	self.var.IndexPointer += 1
-	if self.var.IndexPointer > self.var.InstanceCount then
-		self.var.IndexPointer = 1
-	end
 	
 	if self.PoolParent then
 		instance.Parent = self.PoolParent
@@ -149,7 +143,6 @@ Pool.ClearPool = function(self: Pool)
 	
 	table.clear(self.var.Instances)
 	self.var.InstanceCount = 0
-	self.var.IndexPointer = 1
 end
 
 Pool.new = function(args: PoolArgs): Pool
