@@ -13,7 +13,7 @@ or similar objects appear in high quantity.
 local Pool = {}
 Pool.__index = Pool
 
-export type PooledInstance = Instance -- For clearer intelisense
+export type PooledInstance = Instance -- Explicitly define instances which are in the pool
 
 type InstanceData = {
 	Available: boolean,
@@ -22,7 +22,7 @@ type InstanceData = {
 
 local defaultValues = {
 	var = { -- Private variables
-		Instances = {} :: {InstanceData},
+		Instances = {} :: {[PooledInstance]: InstanceData},
 		
 		InstanceCount = 0,
 		IndexPointer = 1
