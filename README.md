@@ -8,6 +8,4 @@ Extras:
 
 [Glider](https://gyazo.com/dc23ebade6e39c2484b390e1ebccf483)
 
-[Combat (during a test in a one piece cc game)](https://medal.tv/games/roblox/clips/1uyTZ0QM8-dDV_?invite=cr-MSxvTVUsMzM5MDc2MzQs)
-
 I have also developed a new AntiCheat technology which offers more control and cheating detection possibilities.
