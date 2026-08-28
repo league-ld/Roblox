@@ -69,7 +69,6 @@ Pool.RemoveInstanceFromPool = function(self: Pool, instance: PooledInstance?)
 	if not instance then return end
 
 	local data: InstanceData = self.var.Instances[instance]
-	data.Available = true
 
 	for i, v in pairs(self.var.Instances) do
 		if v.Index > data.Index then
