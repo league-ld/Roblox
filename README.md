@@ -8,4 +8,4 @@ Extras:
 
 [Glider](https://gyazo.com/dc23ebade6e39c2484b390e1ebccf483)
 
-I have also developed a new AntiCheat technology which offers more control and cheating detection possibilities. It will be released once I'm done making a plugin for it.
+[CISI ACF](https://github.com/league-ld/CISI-ACF): A new Anti-Cheat framework I have developed.
