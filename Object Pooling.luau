@@ -17,7 +17,8 @@ export type PooledInstance = Instance -- Explicitly define instances which are i
 
 type InstanceData = {
 	Available: boolean,
-	Index: number
+	Index: number,
+	DespawnTask: thread
 }
 
 local defaultValues = {
@@ -40,17 +41,7 @@ type PoolArgs = {
 
 export type Pool = typeof(Pool) & typeof(defaultValues) & PoolArgs
 
-local function deepCopy(t: {}): {}
-	local copy = {}
-	for i, v in pairs(t) do
-		if typeof(v) == "table" then
-			copy[i] = deepCopy(v)
-		else
-			copy[i] = v
-		end
-	end
-	return copy
-end
+const deepCopy = require(game.ReplicatedStorage.Shared.Functions.DeepCopy)
 
 Pool.AddInstanceToPool = function(self: Pool)
 	local instance = self.Prefab:Clone()
@@ -119,7 +110,7 @@ Pool.Spawn = function(self: Pool): PooledInstance
 	end
 	
 	if self.Lifetime then
-		task.delay(self.Lifetime, self.Despawn, self, instance)
+		self.var.Instances[instance].DespawnTask = task.delay(self.Lifetime, self.Despawn, self, instance)
 	end
 	
 	return instance
@@ -127,9 +118,15 @@ end
 
 Pool.Despawn = function(self: Pool, instance: PooledInstance)
 	if not instance then return end
+	if not instance.Parent then return end
 	
 	local data: InstanceData = self.var.Instances[instance]
 	if not data then return end
+	
+	if data.DespawnTask then
+		pcall(task.cancel, data.DespawnTask)
+		data.DespawnTask = nil
+	end
 	
 	data.Available = true
 	instance.Parent = nil
@@ -154,7 +151,7 @@ Pool.new = function(args: PoolArgs): Pool
 		self[i] = v
 	end
 	
-	for i = 0, self.InitInstances do
+	for i = 1, self.InitInstances do
 		self:AddInstanceToPool()
 	end
 	
