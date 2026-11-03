@@ -17,4 +17,4 @@ This can also be routed through a telemetry function which sends the error to so
 
 ***
 
-**__Note:__** Even if these techniques aren't necessarily new, they are techniques I have developed myself over time to fix issues and obstacles I had encountered.
+**__Note:__** Even if these techniques aren't necessarily new, they are techniques I have developed myself over time to fix issues and obstacles I had encountered. These techniques are no an essential part of my biggest to-date project: Stained Mists.
