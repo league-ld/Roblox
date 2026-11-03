@@ -118,10 +118,10 @@ end
 
 Pool.Despawn = function(self: Pool, instance: PooledInstance)
 	if not instance then return end
-	if not instance.Parent then return end
 	
 	local data: InstanceData = self.var.Instances[instance]
 	if not data then return end
+	if not data.Available then return end
 	
 	if data.DespawnTask then
 		pcall(task.cancel, data.DespawnTask)
