@@ -48,7 +48,13 @@ The updateCharacter function runs all the inits and bindConnects to properly ini
 
 ## After
 
-From this point forth, it depends on the specific game. I would usually also have LocalManager to be the center of the important client-sided events, but that too is game-specific. I also utilize my [Personal Techniques](https://github.com/league-ld/Roblox/blob/main/Personal%20Techniques.md) to make the game as scalable as possible. Other stuff like OOP and modules are a must, of course.
+From this point forth, it depends on the specific game. I would usually also have LocalManager to be the center of the important client-sided events, but that too is game-specific. I also utilize my [Personal Techniques](https://github.com/league-ld/Roblox/blob/main/Personal%20Techniques.md) to make the game as scalable as possible. The general idea is to keep systems as separate as possible, so that one system failing keeps the rest from failing as well. I keep ModuleScripts in 4 folders: Modules, Lists, Classes and Functions. Functions are single function modules that I use a lot, like deepCopy or fetchData. Modules are shared code to be accessed from different scripts(StatsHandler, AppearanceLoader, etc.). Classes are the OOP classes. Lists(or I sometimes call them Configs) are tables of data(and often functions) that hold data that may change in the game's development(weapons, skills, dialogues, etc.)
+
+***
+
+## Classes
+
+Most of my classes have a similar logic: they have DefaultValues(which are loaded directly into the main instance table on init), DefaultArgs(which are fallbacks if the main args parameter doesn't include a needed value), DefaultVar(sometimes needed, when a class needs private variables), and other per-class specific files needed. It practically always has an explicit :Destroy() to clean up everything, and set up the Use-After-Free warning from [Personal Techniques](https://github.com/league-ld/Roblox/blob/main/Personal%20Techniques.md).
 
 ***
 
