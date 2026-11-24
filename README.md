@@ -6,7 +6,9 @@
 
 ### [Stained Mists](https://github.com/league-ld/Stained-Mists) (Not done! Slightly a huge project)
 
-Extras:
+## Extras:
+
+[My Architecture](https://github.com/league-ld/Roblox/blob/main/My%20Architecture.md)
 
 (Random clips I had lying around. Nothing special.)
 
