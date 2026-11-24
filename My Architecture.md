@@ -25,7 +25,7 @@ end
 player.CharacterAdded:Connect(updateCharacter)
 ```
 
-First of all this clears connections using clearConnections() function. This ensures there are no dangling updates. Each update runs through bindConnect(event, func) unless needed otherwise. I do not destinguish player update events from character update events lifetimes unless needed otherwise, since this way is less prone to error.
+First of all this clears connections using clearConnections() function. This ensures there are no dangling updates. Each update runs through bindConnect(event, func) unless needed otherwise. I do not distinguish player update events from character update events lifetimes unless needed otherwise, since this way is less prone to error.
 
 ```luau
 local function clearConnections()
@@ -60,4 +60,4 @@ Most of my classes have a similar logic: they have DefaultValues(which are loade
 
 ## Results
 
-Over the years working with and refining the architecture, I must say I am very satisfied with it. I am not saying this just to paint a better picture of myself, but I would genuinely recommend this to other devs. My games are scalable and very easy to add to because of the architecture. There are rarely any hiccups, and if there are, its usually on a smaller scale related to a single system. I will continue using this, as it has prooven itself amazing.
+Over the years working with and refining the architecture, I must say I am very satisfied with it. I am not saying this just to paint a better picture of myself, but I would genuinely recommend this to other devs. My games are scalable and very easy to add to because of the architecture. There are rarely any hiccups, and if there are, its usually on a smaller scale related to a single system. I will continue using this, as it has proven itself amazing.
