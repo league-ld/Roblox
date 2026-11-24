@@ -1,17 +1,36 @@
-# Roblox projects
+<div align="center">
+<h1>Roblox Portfolio</h1>
+</div>
 
-## [Main Youtube Channel](https://www.youtube.com/@LD-dt1sk)
+<div align="center">
+<h2>About Me</h2>
+</div>
 
-### [CISI ACF](https://github.com/league-ld/CISI-ACF): A new Anti-Cheat framework I have developed.
+I am a Roblox software engineer who started developing on Roblox in 2020. I have taken quite a liking to RPG games in particular, and it's what I'm the best at doing. My main strength is designing a strong software architecture which is scalable and minimizes technical debt.
 
-### [Stained Mists](https://github.com/league-ld/Stained-Mists) (Not done! Slightly a huge project)
+<div align="center">
+<h2>Bigger Projects</h2>
+</div>
 
-## Extras:
+### [CISI ACF](https://github.com/league-ld/CISI-ACF): An Anti-Cheat Framework designed to allow developers to write client-sided anti-cheats for additional security.
 
-[My Architecture](https://github.com/league-ld/Roblox/blob/main/My%20Architecture.md)
+### [Stained Mists](https://github.com/league-ld/Stained-Mists) (Not done! Slightly a huge project. You can still read about things that are done and that are planned!)
 
-(Random clips I had lying around. Nothing special.)
+<div align="center">
+<h2>Things to Check Out</h2>
+</div>
 
-[Inventory](https://gyazo.com/c6e45bd42eee0fa1ac2818cdd12318ea)
+### [Past Work](https://github.com/league-ld/Roblox/blob/main/Previous%20Projects.md): Some of my past work.
 
-[Glider](https://gyazo.com/dc23ebade6e39c2484b390e1ebccf483)
+### [My Architecture](https://github.com/league-ld/Roblox/blob/main/My%20Architecture.md): The way I structure my games.
+
+### [Personal Techniques](https://github.com/league-ld/Roblox/blob/main/Personal%20Techniques.md): The techniques I developed when faced with certain problems.
+
+### [Session Locking](https://github.com/league-ld/Roblox/blob/main/Session%20Locking.luau): Making sure data isn't getting overwritten.
+
+### [Object Pooling](https://github.com/league-ld/Roblox/blob/main/Object%20Pooling.luau): An optimization trick for working with many objects.
+
+<div align="center">
+<h2>Video Showcases</h2>
+  <h3><a href="https://www.youtube.com/@LD-dt1sk">My Youtube Channel</a></h3> 
+</div>
