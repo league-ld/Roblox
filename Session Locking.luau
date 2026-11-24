@@ -165,6 +165,8 @@ local renewalThread = task.spawn(function()
 		for dataKey, sessionData in pairs(heldSessionLocks) do
 			task.spawn(function()
 				for i = 1, 2 do
+					if not heldSessionLocks[dataKey] then break end
+					
 					local code = SessionLock.claimSessionLock(dataKey)
 					if code == SLEnum.ClaimResponseStatus.Failed then
 						if i == 2 then
