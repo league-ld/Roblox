@@ -14,3 +14,7 @@ puzzles and struggling to unlock the abilities have fueled my desire for develop
 **Stained Mists**: W.I.P. RPG game. My biggest project.
 
 _Wow this transition from ISC to SM descriptions feels anti-climactic._
+
+***
+
+[Hackerbox](https://www.roblox.com/games/125191063297975/Hackerbox): A place to learn ethical hacking.
