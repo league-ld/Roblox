@@ -14,7 +14,7 @@ I am a Roblox software engineer who started developing on Roblox in 2020. I have
 
 ### [CISI ACF](https://github.com/league-ld/CISI-ACF): An Anti-Cheat Framework designed to allow developers to write client-sided anti-cheats for additional security.
 
-### [Stained Mists](https://github.com/league-ld/Stained-Mists) (Not done! Slightly a huge project. You can still read about things that are done and that are planned!)
+### [Stained Mists](https://github.com/league-ld/Stained-Mists) (Not done! Slightly a huge project for a solo dev. You can still read about things that are done and that are planned!)
 
 <div align="center">
 <h2>Things to Check Out</h2>
